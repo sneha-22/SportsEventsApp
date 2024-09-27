@@ -1,5 +1,5 @@
 import React from 'react';
-import EventCard from './EventCard';
+import EventCard from '../event-card-component/EventCard';
 
 const AllEvents = ({ events, onSelectEvent, selectedEvents }) => {
     return (
@@ -11,7 +11,7 @@ const AllEvents = ({ events, onSelectEvent, selectedEvents }) => {
                 <div className="events-list">
                     {events.map((event) => (
                         <EventCard key={event.id} event={event} onSelectEvent={onSelectEvent} 
-                            isSelected={selectedEvents.find(e => e.id === event.id)}/> 
+                            isSelected={!!selectedEvents.find(e => e.id === event.id)}/> 
                     ))}
                 </div>
             </div>

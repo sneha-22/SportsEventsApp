@@ -1,5 +1,5 @@
 import React from 'react'
-import EventCard from './EventCard';
+import EventCard from '../event-card-component/EventCard';
 
 const SelectedEvents = ({ events, onDeselectEvent }) => {
     return (

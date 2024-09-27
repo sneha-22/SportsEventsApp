@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import AllEvents from './components/AllEvents';
-import SelectedEvents from './components/SelectedEvents';
+import AllEvents from './components/all-events-component/AllEvents';
+import SelectedEvents from './components/selected-events-component/SelectedEvents';
 import mockEvents from './mocks/MockEvents';
 function App() {
 
