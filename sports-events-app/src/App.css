@@ -1,4 +1,8 @@
 /* src/App.css */
+
+body {
+  max-width: 93%;
+}
 #root {
   width: 90%;
   flex-wrap: wrap;
@@ -6,13 +10,34 @@
 
 .app-container {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  width: 100%;
-  gap: 20px;
+  flex-direction: column; /* Stack vertically on small screens */
+  width: 100%; /* Ensure it takes the full width */
 }
 
-.event-card, .selected-event-card {
+.events-container {
+  margin-left: 5vh;
+  margin-right: 5vh;
+  flex: 0 0 75%; /* 80% width for All Events container */
+  /* margin: 0 0;  */
+}
+
+.selected-events-container {
+  /* margin-left: 5vh; */
+  flex: 0 0 25%; /* 20% width for Selected Events container */
+  /* margin: 0 0;  */
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    flex-direction: row; /* Change to horizontal on larger screens */
+  }
+
+
+}
+
+/* Add the rest of your styles here... */
+.event-card,
+.selected-event-card {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
@@ -20,7 +45,9 @@
   background-color: #f9f9f9;
 }
 
-.event-card button, .selected-event-card button {
+.event-card button,
+.selected-event-card button {
+  width: 100%; /* Full width for buttons */
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
@@ -33,33 +60,28 @@
 
 .box {
   border: 2px solid #ccc; /* Light grey border around each box */
-  padding: 20px; /* Add space inside the box */
+  padding: 5vh; /* Responsive padding */
   background-color: #f9f9f9; /* Optional: light background color */
   border-radius: 8px; /* Optional: rounded corners */
 }
 
-.events-container {
-  flex: 0 0 75%;     
-}
-
-.selected-events-container {
-  flex: 0 0 25%; 
-}
-
-.app-title {
-  display: flex;
-  justify-content: center;
-
-}
-
-
-
 .events-list {
   display: grid; /* Use grid layout */
-  grid-template-columns: repeat(3, 1fr); /* 4 cards per row */
-  gap: 20px; /* Space between cards */
+  grid-template-columns: repeat(1, 1fr); /* 1 card per row on small screens */
+  gap: 15px; /* Space between cards */
 }
 
+@media (min-width: 600px) {
+  .events-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .events-list {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on large screens */
+  }
+}
 
 .btn-container {
   float: right;
@@ -73,5 +95,10 @@
 }
 
 .sort-by {
-  padding-left:20px;
+  padding-left: 20px;
+}
+
+.app-title {
+  display: flex;
+  justify-content: center;
 }

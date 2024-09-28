@@ -21,7 +21,8 @@ const EventCard = ({ event, onSelectEvent, onDeselectEvent, isSelectedView, isSe
     <div className={`event-card ${!isSelectedView ? isSelected ? "selected" : "" : ""}`}>
       <h3>{event.event_name}</h3>
       <p>Category: {event.event_category}</p>
-      <p>Timing: {formatEventTiming(event.start_time, event.end_time)}</p>
+      <p>Date: {formatEventTiming(event.start_time, event.end_time).substring(0,12)}</p>
+      <p>Timing: {formatEventTiming(event.start_time, event.end_time).substring(12)}</p>
       <div className={isSelected ? 'btn-container-selected' : 'btn-container'}>
         <button onClick={() => isSelectedView ? onDeselectEvent(event) : onSelectEvent(event)} disabled={!isSelectedView ? isSelected : false}>
           {isSelectedView ? 'Remove' : 'Select'}
