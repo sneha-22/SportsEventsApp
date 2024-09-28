@@ -5,13 +5,15 @@ import SelectedEvents from './components/selected-events-component/SelectedEvent
 import mockEvents from './mocks/MockEvents';
 function App() {
 
+  // Load saved events from localStorage on initial render
   const localSavedEvents = () => {
     const savedEvents = localStorage.getItem("selectedEvents");
     return savedEvents ? JSON.parse(savedEvents) : []
   }
   const [selectedEvents, setSelectedEvents] = useState(localSavedEvents());
 
-  // Load saved events from localStorage on initial render
+
+  //Store selected events in local storage, whenever changing
   useEffect(() => {
     localStorage.setItem("selectedEvents", JSON.stringify(selectedEvents));
   }, [selectedEvents]);

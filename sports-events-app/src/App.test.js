@@ -44,13 +44,14 @@ describe('App Component', () => {
     // Simulate selecting events
     const selectButtons = screen.getAllByText(/Select/i);
     fireEvent.click(selectButtons[0]);
-    fireEvent.click(selectButtons[1]);
-    fireEvent.click(selectButtons[2]);
+    fireEvent.click(selectButtons[8]);
+    fireEvent.click(selectButtons[14]);
 
     // Attempt to select a fourth event
-    fireEvent.click(selectButtons[3]);
+    fireEvent.click(selectButtons[17]);
 
     // Expect an alert to be shown (mock window.alert)
+   
     jest.spyOn(window, 'alert').mockImplementation(() => {});
     fireEvent.click(selectButtons[3]);
     expect(window.alert).toHaveBeenCalledWith('You have reached maximum number of events.');

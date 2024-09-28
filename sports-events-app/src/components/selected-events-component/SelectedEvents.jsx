@@ -2,6 +2,7 @@ import React from 'react'
 import EventCard from '../event-card-component/EventCard';
 
 const SelectedEvents = ({ events, onDeselectEvent }) => {
+    console.log('rendered')
     return (
 
         <>

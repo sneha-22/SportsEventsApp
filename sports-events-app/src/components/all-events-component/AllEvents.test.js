@@ -12,7 +12,7 @@ jest.mock('../event-card-component/EventCard', () => {
 
 describe('AllEvents Component', () => {
     const mockEvents = [
-        { id: 2, event_name: 'Event 2', event_category: 'Sports' },
+        { id: 1, event_name: 'Event 1', event_category: 'Sports' },
     ];
     const mockOnSelectEvent = jest.fn();
     const mockSelectedEvents = [
@@ -43,7 +43,7 @@ describe('AllEvents Component', () => {
                 {
                     event: event,
                     onSelectEvent: mockOnSelectEvent,
-                    isSelected: true
+                    isSelected: false
                 },
                 {}
             )
@@ -54,5 +54,15 @@ describe('AllEvents Component', () => {
     test('does not render EventCard if no events are provided', () => {
         render(<AllEvents events={[]} onSelectEvent={mockOnSelectEvent} selectedEvents={mockSelectedEvents} />);
         expect(EventCard).not.toHaveBeenCalled();
+    });
+
+    test('should render filter dropdown', () => {
+        render(<AllEvents events={mockEvents} onSelectEvent={mockOnSelectEvent} selectedEvents={[]}/>)
+        expect(screen.getByText(/Filter :/i));
+    });
+
+    test('should render sort by dropdown', () => {
+        render(<AllEvents events={mockEvents} onSelectEvent={mockOnSelectEvent} selectedEvents={[]}/>)
+        expect(screen.getByText(/Sort by :/i));
     });
 });
