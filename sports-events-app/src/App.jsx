@@ -12,7 +12,7 @@ function App() {
     return savedEvents ? JSON.parse(savedEvents) : []
   }
 
-  const API_URL = 'https://run.mocky.io/v3/e3096faa-7670-4c6b-9085-b2469da6b1b6';
+  const API_URL = 'https://run.mocky.io/v3/d1b4d3f6-d64d-467f-a85d-a17679dcd65f';
   const [loading, setLoading] = useState(true);
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvents, setSelectedEvents] = useState(localSavedEvents());
