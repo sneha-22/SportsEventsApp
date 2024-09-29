@@ -17,22 +17,17 @@ body {
 .events-container {
   margin-left: 5vh;
   margin-right: 5vh;
-  flex: 0 0 75%; /* 80% width for All Events container */
-  /* margin: 0 0;  */
+  flex: 0 0 75%; /* 75% width for All Events container */
 }
 
 .selected-events-container {
-  /* margin-left: 5vh; */
-  flex: 0 0 25%; /* 20% width for Selected Events container */
-  /* margin: 0 0;  */
+  flex: 0 0 25%; /* 25% width for Selected Events container */
 }
 
 @media (min-width: 768px) {
   .app-container {
     flex-direction: row; /* Change to horizontal on larger screens */
   }
-
-
 }
 
 /* Add the rest of your styles here... */
@@ -47,9 +42,8 @@ body {
 
 .event-card button,
 .selected-event-card button {
-  width: 100%; /* Full width for buttons */
   padding: 8px 12px;
-  border: none;
+  border: 1px solid grey;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -59,16 +53,16 @@ body {
 }
 
 .box {
-  border: 2px solid #ccc; /* Light grey border around each box */
-  padding: 5vh; /* Responsive padding */
-  background-color: #f9f9f9; /* Optional: light background color */
-  border-radius: 8px; /* Optional: rounded corners */
+  border: 2px solid #ccc; 
+  padding: 5vh; 
+  background-color: #f9f9f9; 
+  border-radius: 8px;
 }
 
 .events-list {
-  display: grid; /* Use grid layout */
+  display: grid;
   grid-template-columns: repeat(1, 1fr); /* 1 card per row on small screens */
-  gap: 15px; /* Space between cards */
+  gap: 15px;
 }
 
 @media (min-width: 600px) {
@@ -83,15 +77,11 @@ body {
   }
 }
 
-.btn-container {
-  float: right;
-  border: 1px solid grey;
-  border-radius: 5px;
-}
-
-.btn-container-selected {
-  float: right;
-  border-radius: 5px;
+.btn-container,
+.btn-container-selected
+{
+  display: flex;
+  justify-content: end;
 }
 
 .sort-by {
@@ -101,4 +91,12 @@ body {
 .app-title {
   display: flex;
   justify-content: center;
+}
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
 }

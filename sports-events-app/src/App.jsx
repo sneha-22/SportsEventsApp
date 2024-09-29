@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import AllEvents from './components/all-events-component/AllEvents';
 import SelectedEvents from './components/selected-events-component/SelectedEvents';
-import mockEvents from './mocks/MockEvents';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 function App() {
 
   // Load saved events from localStorage on initial render
@@ -10,6 +11,10 @@ function App() {
     const savedEvents = localStorage.getItem("selectedEvents");
     return savedEvents ? JSON.parse(savedEvents) : []
   }
+
+  const API_URL = 'https://run.mocky.io/v3/e3096faa-7670-4c6b-9085-b2469da6b1b6';
+  const [loading, setLoading] = useState(true);
+  const [allEvents, setAllEvents] = useState([]);
   const [selectedEvents, setSelectedEvents] = useState(localSavedEvents());
 
 
@@ -18,20 +23,36 @@ function App() {
     localStorage.setItem("selectedEvents", JSON.stringify(selectedEvents));
   }, [selectedEvents]);
 
-  const hasClashingEvents = (newEvent) => {
-    return selectedEvents.some(e => {
-      const newEventStart = new Date(newEvent.start_time);
-      const newEventEnd = new Date(newEvent.end_time);     // Parsing date strings to Date objects
+  useEffect(() => {
+    setLoading(true); // Set loading to true before API call
+    fetch(API_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllEvents(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
+  }, [])
 
-      const eventStart = new Date(e.start_time);
-      const eventEnd = new Date(e.end_time);
+  const hasClashingEvents = useMemo(() => {
+    return (newEvent) => {
+      return selectedEvents.some(e => {
+        const newEventStart = new Date(newEvent.start_time);
+        const newEventEnd = new Date(newEvent.end_time);     // Parsing date strings to Date objects
 
-      // Check if the new event overlaps with any existing event
-      return (newEventStart < eventEnd && newEventEnd > eventStart)
+        const eventStart = new Date(e.start_time);
+        const eventEnd = new Date(e.end_time);
 
-    });
-  }
+        // Check if the new event overlaps with any existing event
+        return (newEventStart < eventEnd && newEventEnd > eventStart)
 
+      });
+    }
+
+  }, [selectedEvents])
 
   const handleSelectEvent = (_event) => {
     if (selectedEvents.length >= 3) {
@@ -50,7 +71,6 @@ function App() {
     setSelectedEvents(updatedSelectedEvents);
   }
 
-  
   return (
     <>
       <div className='app-title'>
@@ -58,12 +78,18 @@ function App() {
       </div>
       <div className="app-container">
         <div className="box events-container">
-          <AllEvents events={mockEvents} onSelectEvent={handleSelectEvent} selectedEvents={selectedEvents} />
-
+          {
+            loading ? (
+              <div className="spinner-container">
+                <ClipLoader color="#09f" loading={loading} size={50} />
+                <span>Loading events...</span>
+              </div>
+            ) : 
+              <AllEvents events={allEvents} onSelectEvent={handleSelectEvent} selectedEvents={selectedEvents} />
+          }
         </div>
         <div className="box selected-events-container">
           <SelectedEvents events={selectedEvents} onDeselectEvent={handleDeselectEvent} />
-
         </div>
       </div>
     </>
