@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CategoryFilter from './CategoryFilter';
+import '@testing-library/jest-dom';
+
 
 describe('CategoryFilter Component', () => {
     const mockFilters = ['Track', 'Field', 'Swimming'];
